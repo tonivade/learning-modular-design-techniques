@@ -6,6 +6,7 @@ import static org.mockito.Mockito.when;
 
 import org.junit.Test;
 
+import com.lmn.shop.Barcode;
 import com.lmn.shop.BarcodeReader;
 import com.lmn.shop.Display;
 import com.lmn.shop.DisplayPriceUseCase;
@@ -23,8 +24,8 @@ public class DisplayPriceTest
   @Test
   public void productExists()
   {
-    when(products.findPrice("barcode")).thenReturn(new Price(20.0));
-    when(reader.read()).thenReturn("barcode");
+    when(reader.read()).thenReturn(new Barcode("01203002230"));
+    when(products.findPrice(new Barcode("01203002230"))).thenReturn(new Price(20.0));
 
     useCase.execute();
 
@@ -34,7 +35,7 @@ public class DisplayPriceTest
   @Test(expected = RuntimeException.class)
   public void unknownProduct()
   {
-    when(reader.read()).thenReturn("barcode");
+    when(reader.read()).thenReturn(new Barcode("0102023233332"));
 
     useCase.execute();
   }

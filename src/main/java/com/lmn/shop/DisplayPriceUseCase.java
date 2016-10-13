@@ -15,12 +15,12 @@ public class DisplayPriceUseCase
 
   public void execute()
   {
-    String barcode = reader.read();
+    Barcode barcode = reader.read();
     Price price = getPrice(barcode);
     display.printPrice(price);
   }
 
-  private Price getPrice(String barcode)
+  private Price getPrice(Barcode barcode)
   {
     Price price = products.findPrice(barcode);
     if (price == null)
