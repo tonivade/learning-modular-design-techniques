@@ -1,5 +1,6 @@
 package com.lmn.shop.test;
 
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -36,6 +37,7 @@ public class DisplayPriceTest
   public void unknownProduct()
   {
     when(reader.read()).thenReturn(new Barcode("0102023233332"));
+    doThrow(RuntimeException.class).when(products).findPrice(new Barcode("0102023233332"));
 
     useCase.execute();
   }

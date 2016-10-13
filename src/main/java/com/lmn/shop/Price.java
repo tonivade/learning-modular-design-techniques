@@ -15,6 +15,12 @@ public class Price
   }
 
   @Override
+  public String toString()
+  {
+    return "Price [value=" + value + "]";
+  }
+
+  @Override
   public int hashCode()
   {
     final int prime = 31;
@@ -38,5 +44,4 @@ public class Price
       return false;
     return true;
   }
-
 }

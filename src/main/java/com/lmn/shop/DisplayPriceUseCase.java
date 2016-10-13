@@ -22,11 +22,6 @@ public class DisplayPriceUseCase
 
   private Price getPrice(Barcode barcode)
   {
-    Price price = products.findPrice(barcode);
-    if (price == null)
-    {
-      throw new RuntimeException();
-    }
-    return price;
+    return products.findPrice(barcode);
   }
 }
