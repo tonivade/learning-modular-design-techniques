@@ -1,15 +1,15 @@
-package com.lmn.shop;
+package com.lmn.shop.domain;
 
-public class Price
+public class Barcode
 {
-  private double value;
+  private String value;
 
-  public Price(double value)
+  public Barcode(String value)
   {
     this.value = value;
   }
 
-  public double getValue()
+  public String getValue()
   {
     return value;
   }
@@ -17,7 +17,7 @@ public class Price
   @Override
   public String toString()
   {
-    return "Price [value=" + value + "]";
+    return "Barcode [value=" + value + "]";
   }
 
   @Override
@@ -25,8 +25,7 @@ public class Price
   {
     final int prime = 31;
     int result = 1;
-    long temp = Double.doubleToLongBits(value);
-    result = prime * result + (int) (temp ^ (temp >>> 32));
+    result = prime * result + ((value == null) ? 0 : value.hashCode());
     return result;
   }
 
@@ -39,8 +38,13 @@ public class Price
       return false;
     if (getClass() != obj.getClass())
       return false;
-    Price other = (Price) obj;
-    if (Double.doubleToLongBits(value) != Double.doubleToLongBits(other.value))
+    Barcode other = (Barcode) obj;
+    if (value == null)
+    {
+      if (other.value != null)
+        return false;
+    }
+    else if (!value.equals(other.value))
       return false;
     return true;
   }

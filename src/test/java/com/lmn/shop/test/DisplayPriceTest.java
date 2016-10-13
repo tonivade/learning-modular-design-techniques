@@ -7,12 +7,12 @@ import static org.mockito.Mockito.when;
 
 import org.junit.Test;
 
-import com.lmn.shop.Barcode;
-import com.lmn.shop.BarcodeReader;
-import com.lmn.shop.Display;
-import com.lmn.shop.DisplayPriceUseCase;
-import com.lmn.shop.Price;
-import com.lmn.shop.ProductRepository;
+import com.lmn.shop.domain.Barcode;
+import com.lmn.shop.domain.DisplayPriceUseCase;
+import com.lmn.shop.domain.Price;
+import com.lmn.shop.ports.BarcodeReader;
+import com.lmn.shop.ports.Display;
+import com.lmn.shop.ports.ProductRepository;
 
 public class DisplayPriceTest
 {
@@ -25,20 +25,25 @@ public class DisplayPriceTest
   @Test
   public void productExists()
   {
-    when(reader.read()).thenReturn(new Barcode("01203002230"));
-    when(products.findPrice(new Barcode("01203002230"))).thenReturn(new Price(20.0));
+    String value = "01203002230";
+    when(reader.read()).thenReturn(new Barcode(value));
+    Price price = new Price(20.0);
+    when(products.findPrice(new Barcode(value))).thenReturn(price);
 
     useCase.execute();
 
-    verify(display).printPrice(new Price(20.0));
+    verify(display).printPrice(price);
   }
 
-  @Test(expected = RuntimeException.class)
+  @Test
   public void unknownProduct()
   {
-    when(reader.read()).thenReturn(new Barcode("0102023233332"));
-    doThrow(RuntimeException.class).when(products).findPrice(new Barcode("0102023233332"));
+    String value = "0102023233332";
+    when(reader.read()).thenReturn(new Barcode(value));
+    doThrow(RuntimeException.class).when(products).findPrice(new Barcode(value));
 
     useCase.execute();
+
+    verify(display).unknownProduct(new Barcode(value));
   }
 }

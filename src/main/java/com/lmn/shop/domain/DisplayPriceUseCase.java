@@ -1,4 +1,8 @@
-package com.lmn.shop;
+package com.lmn.shop.domain;
+
+import com.lmn.shop.ports.BarcodeReader;
+import com.lmn.shop.ports.Display;
+import com.lmn.shop.ports.ProductRepository;
 
 public class DisplayPriceUseCase
 {
@@ -16,12 +20,13 @@ public class DisplayPriceUseCase
   public void execute()
   {
     Barcode barcode = reader.read();
-    Price price = getPrice(barcode);
-    display.printPrice(price);
-  }
-
-  private Price getPrice(Barcode barcode)
-  {
-    return products.findPrice(barcode);
+    try
+    {
+      display.printPrice(products.findPrice(barcode));
+    }
+    catch (RuntimeException e)
+    {
+      display.unknownProduct(barcode);
+    }
   }
 }
