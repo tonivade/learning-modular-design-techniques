@@ -3,21 +3,18 @@ package com.lmn.shop.domain;
 public class Price
 {
   private double value;
+  private String currency;
 
-  public Price(double value)
+  public Price(double value, String currency)
   {
     this.value = value;
-  }
-
-  public double getValue()
-  {
-    return value;
+    this.currency = currency;
   }
 
   @Override
   public String toString()
   {
-    return "Price [value=" + value + "]";
+    return "Price [" + currency + " " + value + "]";
   }
 
   @Override
@@ -25,6 +22,7 @@ public class Price
   {
     final int prime = 31;
     int result = 1;
+    result = prime * result + ((currency == null) ? 0 : currency.hashCode());
     long temp = Double.doubleToLongBits(value);
     result = prime * result + (int) (temp ^ (temp >>> 32));
     return result;
@@ -40,8 +38,16 @@ public class Price
     if (getClass() != obj.getClass())
       return false;
     Price other = (Price) obj;
+    if (currency == null)
+    {
+      if (other.currency != null)
+        return false;
+    }
+    else if (!currency.equals(other.currency))
+      return false;
     if (Double.doubleToLongBits(value) != Double.doubleToLongBits(other.value))
       return false;
     return true;
   }
+
 }

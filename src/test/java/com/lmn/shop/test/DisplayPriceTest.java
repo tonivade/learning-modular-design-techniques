@@ -27,7 +27,7 @@ public class DisplayPriceTest
   {
     String value = "01203002230";
     when(reader.read()).thenReturn(new Barcode(value));
-    Price price = new Price(20.0);
+    Price price = new Price(20.0, "EUR");
     when(products.findPrice(new Barcode(value))).thenReturn(price);
 
     useCase.execute();
