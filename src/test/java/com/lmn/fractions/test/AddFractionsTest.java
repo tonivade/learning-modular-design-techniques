@@ -52,6 +52,14 @@ public class AddFractionsTest
     assertThat(oneHalf.plus(ZERO), equalTo(oneHalf));
   }
 
+  @Test
+  public void zeroPlusOneHalf()
+  {
+    Fraction oneHalf = fraction(1, 2);
+
+    assertThat(ZERO.plus(oneHalf), equalTo(oneHalf));
+  }
+
   @Test(expected = IllegalArgumentException.class)
   public void invalidFraction()
   {

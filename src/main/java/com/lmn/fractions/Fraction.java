@@ -8,7 +8,7 @@ public class Fraction
   private final int numerator;
   private final int denominator;
 
-  public Fraction(int numerator, int denominator)
+  private Fraction(int numerator, int denominator)
   {
     this.numerator = numerator;
     this.denominator = denominator;
@@ -79,11 +79,7 @@ public class Fraction
     if (getClass() != obj.getClass())
       return false;
     Fraction other = (Fraction) obj;
-    if (denominator != other.denominator)
-      return false;
-    if (numerator != other.numerator)
-      return false;
-    return true;
+    return this.numerator * other.denominator == other.numerator * this.denominator;
   }
 
   @Override
