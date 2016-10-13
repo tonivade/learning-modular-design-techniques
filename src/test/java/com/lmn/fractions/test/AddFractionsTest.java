@@ -8,8 +8,6 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
-import com.lmn.fractions.Fraction;
-
 public class AddFractionsTest
 {
   @Test
@@ -19,45 +17,33 @@ public class AddFractionsTest
   }
 
   @Test
-  public void oneHalfPlusOneHalf()
+  public void sameDenominator()
   {
-    Fraction oneHalf =  fraction(1, 2);
-
-    assertThat(oneHalf.plus(oneHalf), equalTo(ONE));
+    assertThat(fraction(1, 2).plus(fraction(1, 2)), equalTo(ONE));
   }
 
   @Test
   public void oneIsOne()
   {
-    Fraction oneAlso = fraction(2, 2);
-
-    assertThat(oneAlso.reduce(), equalTo(ONE));
+    assertThat(fraction(2, 2), equalTo(ONE));
   }
 
   @Test
-  public void oneHavePlusOneThird()
+  public void differentDenominator()
   {
-    Fraction oneHalf = fraction(1, 2);
-    Fraction oneThird = fraction(1, 3);
-    Fraction fiveOverSix = fraction(5, 6);
-
-    assertThat(oneHalf.plus(oneThird), equalTo(fiveOverSix));
+    assertThat(fraction(1, 2).plus(fraction(1, 3)), equalTo(fraction(5, 6)));
   }
 
   @Test
-  public void oneHalfPlusZero()
+  public void fractionPlusZero()
   {
-    Fraction oneHalf = fraction(1, 2);
-
-    assertThat(oneHalf.plus(ZERO), equalTo(oneHalf));
+    assertThat(fraction(1, 2).plus(ZERO), equalTo(fraction(1, 2)));
   }
 
   @Test
-  public void zeroPlusOneHalf()
+  public void zeroPlusFraction()
   {
-    Fraction oneHalf = fraction(1, 2);
-
-    assertThat(ZERO.plus(oneHalf), equalTo(oneHalf));
+    assertThat(ZERO.plus(fraction(1, 2)), equalTo(fraction(1, 2)));
   }
 
   @Test(expected = IllegalArgumentException.class)
