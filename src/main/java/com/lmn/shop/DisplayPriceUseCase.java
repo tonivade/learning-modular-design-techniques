@@ -1,21 +1,16 @@
 package com.lmn.shop;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class DisplayPriceUseCase
 {
   private BarcodeReader reader;
   private Display display;
+  private ProductRepository products;
 
-  private Map<String, Price> products = new HashMap<String, Price>(){{
-    put("barcode", new Price(20.0));
-  }};
-
-  public DisplayPriceUseCase(BarcodeReader reader, Display display)
+  public DisplayPriceUseCase(BarcodeReader reader, Display display, ProductRepository products)
   {
     this.reader = reader;
     this.display = display;
+    this.products = products;
   }
 
   public void execute()
@@ -27,7 +22,7 @@ public class DisplayPriceUseCase
 
   private Price getPrice(String barcode)
   {
-    Price price = products.get(barcode);
+    Price price = products.findPrice(barcode);
     if (price == null)
     {
       throw new RuntimeException();
