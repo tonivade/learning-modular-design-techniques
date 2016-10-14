@@ -28,11 +28,24 @@ public class SaleMultipleProductsUseCase
       {
         break;
       }
+      total = sell(total, barcode);
+    }
+
+    display.printTotal(total);
+  }
+
+  private Price sell(Price total, Barcode barcode)
+  {
+    try
+    {
       Price findPrice = products.findPrice(barcode);
       display.printPrice(findPrice);
       total = total.plus(findPrice);
     }
-
-    display.printTotal(total);
+    catch (RuntimeException e)
+    {
+      display.unknownProduct(barcode);
+    }
+    return total;
   }
 }
