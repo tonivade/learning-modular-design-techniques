@@ -1,4 +1,4 @@
-package com.lmn.shop.ports.secondary;
+package com.lmn.shop.domain.ports.secondary;
 
 import com.lmn.shop.domain.Barcode;
 import com.lmn.shop.domain.Price;

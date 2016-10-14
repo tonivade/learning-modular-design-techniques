@@ -1,12 +1,12 @@
-package com.lmn.shop.ports.primary;
+package com.lmn.shop.domain.ports.primary;
 
 import java.util.Optional;
 
 import com.lmn.shop.domain.Barcode;
 import com.lmn.shop.domain.Price;
-import com.lmn.shop.ports.secondary.BarcodeReader;
-import com.lmn.shop.ports.secondary.Display;
-import com.lmn.shop.ports.secondary.ProductRepository;
+import com.lmn.shop.domain.ports.secondary.BarcodeReader;
+import com.lmn.shop.domain.ports.secondary.Display;
+import com.lmn.shop.domain.ports.secondary.ProductRepository;
 
 public class SaleMultipleProductsUseCase
 {
