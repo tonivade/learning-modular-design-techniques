@@ -3,12 +3,12 @@ package com.lmn.shop.domain;
 import com.lmn.shop.ports.Display;
 import com.lmn.shop.ports.ProductRepository;
 
-public class DisplayPriceUseCase
+public class SaleOneProductUseCase
 {
   private Display display;
   private ProductRepository products;
 
-  public DisplayPriceUseCase(Display display, ProductRepository products)
+  public SaleOneProductUseCase(Display display, ProductRepository products)
   {
     this.display = display;
     this.products = products;

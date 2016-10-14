@@ -8,17 +8,17 @@ import static org.mockito.Mockito.when;
 import org.junit.Test;
 
 import com.lmn.shop.domain.Barcode;
-import com.lmn.shop.domain.DisplayPriceUseCase;
+import com.lmn.shop.domain.SaleOneProductUseCase;
 import com.lmn.shop.domain.Price;
 import com.lmn.shop.ports.Display;
 import com.lmn.shop.ports.ProductRepository;
 
-public class DisplayPriceTest
+public class SaleOneProductTest
 {
   private Display display = mock(Display.class);
   private ProductRepository products = mock(ProductRepository.class);
 
-  private DisplayPriceUseCase useCase = new DisplayPriceUseCase(display, products);
+  private SaleOneProductUseCase useCase = new SaleOneProductUseCase(display, products);
 
   @Test
   public void productExists()
