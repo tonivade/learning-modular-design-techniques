@@ -8,10 +8,10 @@ import static org.mockito.Mockito.when;
 import org.junit.Test;
 
 import com.lmn.shop.domain.Barcode;
-import com.lmn.shop.domain.SaleOneProductUseCase;
+import com.lmn.shop.ports.primary.SaleOneProductUseCase;
+import com.lmn.shop.ports.secondary.Display;
+import com.lmn.shop.ports.secondary.ProductRepository;
 import com.lmn.shop.domain.Price;
-import com.lmn.shop.ports.Display;
-import com.lmn.shop.ports.ProductRepository;
 
 public class SaleOneProductTest
 {

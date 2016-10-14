@@ -1,7 +1,8 @@
-package com.lmn.shop.domain;
+package com.lmn.shop.ports.primary;
 
-import com.lmn.shop.ports.Display;
-import com.lmn.shop.ports.ProductRepository;
+import com.lmn.shop.domain.Barcode;
+import com.lmn.shop.ports.secondary.Display;
+import com.lmn.shop.ports.secondary.ProductRepository;
 
 public class SaleOneProductUseCase
 {
