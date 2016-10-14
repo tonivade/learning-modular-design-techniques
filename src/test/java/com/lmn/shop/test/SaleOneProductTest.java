@@ -8,10 +8,10 @@ import static org.mockito.Mockito.when;
 import org.junit.Test;
 
 import com.lmn.shop.domain.Barcode;
+import com.lmn.shop.domain.Price;
 import com.lmn.shop.ports.primary.SaleOneProductUseCase;
 import com.lmn.shop.ports.secondary.Display;
 import com.lmn.shop.ports.secondary.ProductRepository;
-import com.lmn.shop.domain.Price;
 
 public class SaleOneProductTest
 {
@@ -24,7 +24,7 @@ public class SaleOneProductTest
   public void productExists()
   {
     String value = "01203002230";
-    Price price = new Price(20.0, "EUR");
+    Price price = new Price(200, "EUR");
     when(products.findPrice(new Barcode(value))).thenReturn(price);
 
     useCase.execute(new Barcode(value));

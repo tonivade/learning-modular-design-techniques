@@ -21,7 +21,7 @@ public class SaleMultipleProductsUseCase
 
   public void execute()
   {
-    Price total = new Price(0.0, "EUR");
+    Price total = new Price(0, "EUR");
     while (true) {
       Barcode barcode = reader.read();
       if (barcode == null)
