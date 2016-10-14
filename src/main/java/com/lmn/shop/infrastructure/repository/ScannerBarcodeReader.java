@@ -1,13 +1,19 @@
 package com.lmn.shop.infrastructure.repository;
 
+import java.io.InputStream;
 import java.util.Scanner;
 
 import com.lmn.shop.domain.Barcode;
 import com.lmn.shop.domain.ports.secondary.BarcodeReader;
 
-public class StdInBarcodeReader implements BarcodeReader
+public class ScannerBarcodeReader implements BarcodeReader
 {
-  private Scanner scanner = new Scanner(System.in);
+  private Scanner scanner;
+
+  public ScannerBarcodeReader(InputStream in)
+  {
+    this.scanner = new Scanner(in);
+  }
 
   @Override
   public Barcode read()

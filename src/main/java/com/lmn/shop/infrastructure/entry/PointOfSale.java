@@ -8,7 +8,7 @@ import com.lmn.shop.domain.Price;
 import com.lmn.shop.domain.ports.primary.SaleMultipleProductsUseCase;
 import com.lmn.shop.infrastructure.repository.ConsoleDisplay;
 import com.lmn.shop.infrastructure.repository.InMemoryProductRepository;
-import com.lmn.shop.infrastructure.repository.StdInBarcodeReader;
+import com.lmn.shop.infrastructure.repository.ScannerBarcodeReader;
 
 public class PointOfSale
 {
@@ -21,9 +21,16 @@ public class PointOfSale
 
   public static void main(String[] args)
   {
-    SaleMultipleProductsUseCase useCase = new SaleMultipleProductsUseCase(new StdInBarcodeReader(),
-        new ConsoleDisplay(), new InMemoryProductRepository(products));
+    System.out.println("START");
+
+    SaleMultipleProductsUseCase useCase =
+        new SaleMultipleProductsUseCase(
+            new ScannerBarcodeReader(System.in),
+            new ConsoleDisplay(),
+            new InMemoryProductRepository(products));
 
     useCase.execute();
+
+    System.out.println("BYE");
   }
 }
