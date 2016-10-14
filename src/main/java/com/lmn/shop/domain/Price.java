@@ -56,6 +56,6 @@ public class Price
   @Override
   public String toString()
   {
-    return "Price [" + currency + " " + value + "]";
+    return "Price [" + currency + " " + (value / 100) + "]";
   }
 }

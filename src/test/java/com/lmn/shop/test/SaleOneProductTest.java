@@ -25,7 +25,7 @@ public class SaleOneProductTest
   public void productExists()
   {
     String value = "01203002230";
-    Price price = new Price(200, "EUR");
+    Price price = Price.euros(200);
     when(products.findPrice(new Barcode(value))).thenReturn(Optional.of(price));
 
     useCase.execute(new Barcode(value));
