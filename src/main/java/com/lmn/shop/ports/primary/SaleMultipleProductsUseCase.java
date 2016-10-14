@@ -21,15 +21,18 @@ public class SaleMultipleProductsUseCase
 
   public void execute()
   {
+    Price total = new Price(0.0, "EUR");
     while (true) {
       Barcode barcode = reader.read();
       if (barcode == null)
       {
         break;
       }
-      display.printPrice(products.findPrice(barcode));
+      Price findPrice = products.findPrice(barcode);
+      display.printPrice(findPrice);
+      total = total.plus(findPrice);
     }
 
-    display.printTotal(new Price(7.50, "EUR"));
+    display.printTotal(total);
   }
 }

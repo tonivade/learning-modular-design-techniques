@@ -22,10 +22,9 @@ public class SaleMultipleProductsTest
   private SaleMultipleProductsUseCase useCase = new SaleMultipleProductsUseCase(reader, display, products);
 
   @Test
-  public void happyPath() throws Exception
+  public void sellMultipleProducts() throws Exception
   {
     when(reader.read()).thenReturn(new Barcode("11111"), new Barcode("22222"), new Barcode("33333"), null);
-
     when(products.findPrice(new Barcode("11111"))).thenReturn(new Price(1.50, "EUR"));
     when(products.findPrice(new Barcode("22222"))).thenReturn(new Price(2.50, "EUR"));
     when(products.findPrice(new Barcode("33333"))).thenReturn(new Price(3.50, "EUR"));

@@ -50,4 +50,9 @@ public class Price
     return true;
   }
 
+  public Price plus(Price other)
+  {
+     return new Price(this.value + other.value, this.currency);
+  }
+
 }
