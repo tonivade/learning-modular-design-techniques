@@ -2,8 +2,8 @@ package com.lmn.shop.domain;
 
 public class Price
 {
-  private int value;
-  private String currency;
+  private final int value;
+  private final String currency;
 
   public Price(int value, String currency)
   {
@@ -14,6 +14,11 @@ public class Price
   public Price plus(Price other)
   {
      return new Price(this.value + other.value, this.currency);
+  }
+
+  public static Price euros(int value)
+  {
+    return new Price(value, "EUR");
   }
 
   @Override

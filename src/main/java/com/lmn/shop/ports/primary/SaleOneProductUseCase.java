@@ -1,6 +1,9 @@
 package com.lmn.shop.ports.primary;
 
+import java.util.Optional;
+
 import com.lmn.shop.domain.Barcode;
+import com.lmn.shop.domain.Price;
 import com.lmn.shop.ports.secondary.Display;
 import com.lmn.shop.ports.secondary.ProductRepository;
 
@@ -17,11 +20,12 @@ public class SaleOneProductUseCase
 
   public void execute(Barcode barcode)
   {
-    try
+    Optional<Price> findPrice = products.findPrice(barcode);
+    if (findPrice.isPresent())
     {
-      display.printPrice(products.findPrice(barcode));
+      display.printPrice(findPrice.get());
     }
-    catch (RuntimeException e)
+    else
     {
       display.unknownProduct(barcode);
     }

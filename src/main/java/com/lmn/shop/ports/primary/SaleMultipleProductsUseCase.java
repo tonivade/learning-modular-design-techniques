@@ -1,5 +1,7 @@
 package com.lmn.shop.ports.primary;
 
+import java.util.Optional;
+
 import com.lmn.shop.domain.Barcode;
 import com.lmn.shop.domain.Price;
 import com.lmn.shop.ports.secondary.BarcodeReader;
@@ -36,13 +38,13 @@ public class SaleMultipleProductsUseCase
 
   private Price sell(Price total, Barcode barcode)
   {
-    try
+    Optional<Price> findPrice = products.findPrice(barcode);
+    if (findPrice.isPresent())
     {
-      Price findPrice = products.findPrice(barcode);
-      display.printPrice(findPrice);
-      total = total.plus(findPrice);
+      display.printPrice(findPrice.get());
+      total = total.plus(findPrice.get());
     }
-    catch (RuntimeException e)
+    else
     {
       display.unknownProduct(barcode);
     }

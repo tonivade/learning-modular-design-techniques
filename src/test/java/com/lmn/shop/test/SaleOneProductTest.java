@@ -1,9 +1,10 @@
 package com.lmn.shop.test;
 
-import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import java.util.Optional;
 
 import org.junit.Test;
 
@@ -25,7 +26,7 @@ public class SaleOneProductTest
   {
     String value = "01203002230";
     Price price = new Price(200, "EUR");
-    when(products.findPrice(new Barcode(value))).thenReturn(price);
+    when(products.findPrice(new Barcode(value))).thenReturn(Optional.of(price));
 
     useCase.execute(new Barcode(value));
 
@@ -36,7 +37,7 @@ public class SaleOneProductTest
   public void unknownProduct()
   {
     String value = "0102023233332";
-    doThrow(RuntimeException.class).when(products).findPrice(new Barcode(value));
+    when(products.findPrice(new Barcode(value))).thenReturn(Optional.empty());
 
     useCase.execute(new Barcode(value));
 

@@ -1,13 +1,15 @@
 package com.lmn.shop.test;
 
+import static com.lmn.shop.domain.Price.euros;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.Optional;
+
 import org.junit.Test;
 
 import com.lmn.shop.domain.Barcode;
-import com.lmn.shop.domain.Price;
 import com.lmn.shop.ports.primary.SaleMultipleProductsUseCase;
 import com.lmn.shop.ports.secondary.BarcodeReader;
 import com.lmn.shop.ports.secondary.Display;
@@ -25,16 +27,16 @@ public class SaleMultipleProductsTest
   public void sellMultipleProducts() throws Exception
   {
     when(reader.read()).thenReturn(new Barcode("11111"), new Barcode("22222"), new Barcode("33333"), null);
-    when(products.findPrice(new Barcode("11111"))).thenReturn(new Price(150, "EUR"));
-    when(products.findPrice(new Barcode("22222"))).thenReturn(new Price(250, "EUR"));
-    when(products.findPrice(new Barcode("33333"))).thenReturn(new Price(350, "EUR"));
+    when(products.findPrice(new Barcode("11111"))).thenReturn(Optional.of(euros(150)));
+    when(products.findPrice(new Barcode("22222"))).thenReturn(Optional.of(euros(250)));
+    when(products.findPrice(new Barcode("33333"))).thenReturn(Optional.of(euros(350)));
 
     useCase.execute();
 
-    verify(display).printPrice(new Price(150, "EUR"));
-    verify(display).printPrice(new Price(250, "EUR"));
-    verify(display).printPrice(new Price(350, "EUR"));
-    verify(display).printTotal(new Price(750, "EUR"));
+    verify(display).printPrice(euros(150));
+    verify(display).printPrice(euros(250));
+    verify(display).printPrice(euros(350));
+    verify(display).printTotal(euros(750));
   }
 
   @Test
@@ -45,16 +47,16 @@ public class SaleMultipleProductsTest
         .thenReturn(new Barcode("22222"))
         .thenReturn(new Barcode("33333"))
         .thenReturn(null);
-    when(products.findPrice(new Barcode("11111"))).thenReturn(new Price(150, "EUR"));
-    when(products.findPrice(new Barcode("22222"))).thenThrow(RuntimeException.class);
-    when(products.findPrice(new Barcode("33333"))).thenReturn(new Price(350, "EUR"));
+    when(products.findPrice(new Barcode("11111"))).thenReturn(Optional.of(euros(150)));
+    when(products.findPrice(new Barcode("22222"))).thenReturn(Optional.empty());
+    when(products.findPrice(new Barcode("33333"))).thenReturn(Optional.of(euros(350)));
 
     useCase.execute();
 
-    verify(display).printPrice(new Price(150, "EUR"));
+    verify(display).printPrice(euros(150));
     verify(display).unknownProduct(new Barcode("22222"));
-    verify(display).printPrice(new Price(350, "EUR"));
-    verify(display).printTotal(new Price(500, "EUR"));
+    verify(display).printPrice(euros(350));
+    verify(display).printTotal(euros(500));
   }
 
   @Test
@@ -63,11 +65,11 @@ public class SaleMultipleProductsTest
     when(reader.read())
       .thenReturn(new Barcode("11111"))
       .thenReturn(null);
-    when(products.findPrice(new Barcode("11111"))).thenReturn(new Price(150, "EUR"));
+    when(products.findPrice(new Barcode("11111"))).thenReturn(Optional.of(euros(150)));
 
     useCase.execute();
 
-    verify(display).printPrice(new Price(150, "EUR"));
-    verify(display).printTotal(new Price(150, "EUR"));
+    verify(display).printPrice(euros(150));
+    verify(display).printTotal(euros(150));
   }
 }
