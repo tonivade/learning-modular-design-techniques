@@ -9,15 +9,13 @@ import com.lmn.shop.infrastructure.repository.InMemoryProductRepository;
 
 public class InMemoryProductRepositoryTest extends ProductRepositoryContract
 {
-  @SuppressWarnings("serial")
-  private final Map<Barcode, Price> products = new HashMap<Barcode, Price>(){{
-    put(new Barcode("11111"), Price.euros(100));
-    put(new Barcode("22222"), Price.euros(200));
-    put(new Barcode("33333"), Price.euros(300));
-  }};
-
-  protected InMemoryProductRepository createProductRepository()
+  protected InMemoryProductRepository createProductRepository(Map.Entry<Barcode, Price> ... entries)
   {
+    Map<Barcode, Price> products = new HashMap<>();
+    for (Map.Entry<Barcode, Price> entry : entries)
+    {
+      products.put(entry.getKey(), entry.getValue());
+    }
     return new InMemoryProductRepository(products);
   }
 }
